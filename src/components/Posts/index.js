@@ -1,5 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import Entypo from 'react-native-vector-icons/Entypo'
+import { formatDistance } from 'date-fns'
+import { pt, ptBR } from 'date-fns/locale'
 
 import { 
   Container,
@@ -13,24 +15,42 @@ import {
   DatePost
 } from './styles'
 
-import { AuthContext } from '../../contexts/auth'
-
 export default function Posts({ data, userId }){
-  const { user } = useContext(AuthContext)
+  const [likePost, setLikePost] = useState(data?.likes)
+
+  function formatTimePost(){
+    const datePost = new Date(data.created.seconds * 1000)
+
+    return formatDistance(
+      new Date(),
+      datePost,
+      {
+        locale: ptBR
+      }
+    )
+  }
 
   return(
     <Container>
       <UserArea>
-        <UserAvatar source={require('../../assets/avatar.png')}/>
-        <UserName numberOfLines={1}> {data.nome} </UserName>
+
+        {data.avatarUrl ? (
+          <UserAvatar source={{ uri: data.avatarUrl }}/>
+        ) : (
+          <UserAvatar source={require('../../assets/avatar.png')}/>
+        )}
+
+        <UserName numberOfLines={1}> {data?.autor} </UserName>
       </UserArea>
-      <Content>koasfkmoaksfmnokansfijnsfikjnkjasfhbjih bjk bijbhijbniuabfiu bijiuhiubni fniubiubiubiub fi9uabuifffbiubiub iubiuuibiubfia biubiujbfaiu buihjbuih buib aiubn iubiu biunain i nbjnok njk kn kjnkjl nkj.</Content>
+      <Content> {data?.content} </Content>
       <InfoArea>
         <LikeArea>
-          <LikeNumber>3</LikeNumber>
-          <Entypo name='heart' size={20} color='#E52246'/>
+
+          <LikeNumber> {likePost === 0 ? '' : likePost} </LikeNumber>
+          <Entypo name={likePost === 0 ? 'heart-outlined' : 'heart'} size={20} color='#E52246'/>
+
         </LikeArea>
-        <DatePost>a menos de 1 minuto</DatePost>
+        <DatePost> {formatTimePost()} </DatePost>
       </InfoArea>
     </Container>
   )

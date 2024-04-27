@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const Container = styled.View`
-  margin: 10px;
+  margin: 7px;
   background-color: #FFF;
   border-radius: 5px;
   padding: 10px;
@@ -41,7 +41,6 @@ export const InfoArea = styled.View`
 
 export const LikeArea = styled.View`
   flex-direction: row;
-  gap: 3px;
 `
 
 export const LikeNumber = styled.Text`
