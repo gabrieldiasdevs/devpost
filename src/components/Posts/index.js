@@ -24,7 +24,7 @@ export default function Posts({ data, userId }){
         <UserAvatar source={require('../../assets/avatar.png')}/>
         <UserName numberOfLines={1}> {data.nome} </UserName>
       </UserArea>
-      <Content>koasfkmoaksfmnokansfijnsfikjnkjasfhbjih bjk bijbhijbniuabfiu bijiuhiubni fniubiubiubiub fi9uabuibiubiub iubiuuibiubfia biubiujbfaiu buihjbuih buib aiubn iubiu biunain i nbjnok njk kn kjnkjl nkj.</Content>
+      <Content>koasfkmoaksfmnokansfijnsfikjnkjasfhbjih bjk bijbhijbniuabfiu bijiuhiubni fniubiubiubiub fi9uabuifffbiubiub iubiuuibiubfia biubiujbfaiu buihjbuih buib aiubn iubiu biunain i nbjnok njk kn kjnkjl nkj.</Content>
       <InfoArea>
         <LikeArea>
           <LikeNumber>3</LikeNumber>
