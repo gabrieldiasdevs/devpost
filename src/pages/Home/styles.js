@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #36393F;
+  background-color: #F1F1F1;
 `
 
 export const ButtonPost = styled.TouchableOpacity`
@@ -16,4 +16,9 @@ export const ButtonPost = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   z-index: 99;
+`
+
+export const ListPosts = styled.FlatList`
+  flex: 1;
+  background-color: #F1F1F1;
 `
