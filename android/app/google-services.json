@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647957759029",
+    "project_id": "devpost-f89f9",
+    "storage_bucket": "devpost-f89f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647957759029:android:3bf548aede009951909d7c",
+        "android_client_info": {
+          "package_name": "com.devpost"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhN_6iPE-r63vu9XxAuLJ2b7o0neByzAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
