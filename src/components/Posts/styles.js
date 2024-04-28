@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   margin: 7px;
   background-color: #FFF;
   border-radius: 5px;
@@ -39,7 +39,7 @@ export const InfoArea = styled.View`
   justify-content: space-between;
 `
 
-export const LikeArea = styled.View`
+export const LikeArea = styled.TouchableOpacity`
   flex-direction: row;
 `
 

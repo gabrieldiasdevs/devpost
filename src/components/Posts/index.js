@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import Entypo from 'react-native-vector-icons/Entypo'
-import { formatDistance } from 'date-fns'
-import { pt, ptBR } from 'date-fns/locale'
+import { formatDistance, set } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import firestore from '@react-native-firebase/firestore'
+import { useNavigation } from '@react-navigation/native'
 
 import { 
   Container,
@@ -16,7 +18,46 @@ import {
 } from './styles'
 
 export default function Posts({ data, userId }){
+  const navigation = useNavigation()
   const [likePost, setLikePost] = useState(data?.likes)
+
+  async function handleLikePost(id, likes){
+    const docId = `${userId}_${id}`
+
+    const doc = await firestore().collection('likes')
+    .doc(docId).get()
+
+    if(doc.exists){
+      await firestore().collection('posts')
+      .doc(id).update({
+        likes: likes - 1
+      })
+
+      await firestore().collection('likes').doc(docId)
+      .delete()
+      .then(() => {
+        setLikePost(likes - 1)
+      })
+
+      return
+
+    }
+
+    await firestore().collection('likes')
+    .doc(docId).set({
+      postId: id,
+      userId: userId,
+    })
+
+    await firestore().collection('posts')
+    .doc(id).update({
+      likes: likes + 1
+    })
+    .then(() => {
+      setLikePost(likes + 1)
+    })
+
+  }
 
   function formatTimePost(){
     const datePost = new Date(data.created.seconds * 1000)
@@ -31,7 +72,7 @@ export default function Posts({ data, userId }){
   }
 
   return(
-    <Container>
+    <Container activeOpacity={0.8} onPress={ () => navigation.navigate('PostsUser') }>
       <UserArea>
 
         {data.avatarUrl ? (
@@ -44,7 +85,7 @@ export default function Posts({ data, userId }){
       </UserArea>
       <Content> {data?.content} </Content>
       <InfoArea>
-        <LikeArea>
+        <LikeArea onPress={ () => handleLikePost(data.id, likePost) }>
 
           <LikeNumber> {likePost === 0 ? '' : likePost} </LikeNumber>
           <Entypo name={likePost === 0 ? 'heart-outlined' : 'heart'} size={20} color='#E52246'/>
