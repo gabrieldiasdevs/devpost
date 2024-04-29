@@ -30,7 +30,24 @@ export default function Profile(){
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    
+    let isActive = true
+
+    async function loadAvatar(){
+      try{
+        if(isActive){
+          let response = await storage().ref('users')
+          .child(user?.uid).getDownloadURL()
+          setUrl(response)
+        }
+        
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    loadAvatar()
+
+    return () => isActive = false
   }, [])
 
   async function handleSignOut(){
@@ -75,7 +92,7 @@ export default function Profile(){
 
     const options = {
       noData: true,
-      mediaType: 'photo'
+      mediaType: 'photo',
     }
 
     launchImageLibrary(options, response => {
