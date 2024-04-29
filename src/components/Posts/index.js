@@ -72,7 +72,7 @@ export default function Posts({ data, userId }){
   }
 
   return(
-    <Container activeOpacity={0.8} onPress={ () => navigation.navigate('PostsUser') }>
+    <Container onPress={ () => navigation.navigate('PostsUser', { title: data.autor, userId: data.userId } ) }>
       <UserArea>
 
         {data.avatarUrl ? (
