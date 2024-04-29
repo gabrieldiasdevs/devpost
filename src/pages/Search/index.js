@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import firestore from '@react-native-firebase/firestore'
+import SearchList from '../../components/SearchList'
 
 import { 
   Container, 
@@ -14,17 +15,16 @@ export default function Search(){
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-
     if(input === '' || input === undefined){
-      setUsers([])
-      return
+      setUsers([]);
+      return;
     }
 
     const subscriber = firestore().collection('users')
     .where('nome', '>=', input)
-    .where('nome', '<=', input + "/uf8ff")
+    .where('nome', '<=', input + "\uf8ff")
     .onSnapshot( snapshot => {
-      const listUsers = []
+      const listUsers = [];
 
       snapshot.forEach(doc => {
         listUsers.push({
@@ -33,13 +33,14 @@ export default function Search(){
         })
       })
 
-      setUsers(listUsers)
+      setUsers(listUsers);
 
     })
 
-    return () => subscriber()
+    return () => subscriber();
 
   }, [input])
+
 
   return(
     <Container>
@@ -52,6 +53,11 @@ export default function Search(){
           placeholderTextColor='#353840'
         />
       </AreaInput>
+
+      <List
+        data={users}
+        renderItem={ ({ item }) => <SearchList data={item}/> }
+      />
     </Container>
   )
 }

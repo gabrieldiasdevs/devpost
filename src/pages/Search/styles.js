@@ -25,5 +25,5 @@ export const Input = styled.TextInput`
 `
 
 export const List = styled.FlatList`
-
+  flex: 1;
 `
